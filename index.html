@@ -197,6 +197,7 @@
                         <th>Ngày tháng năm</th>
                         <th>Trống</th>
                         <th>Rating</th>
+                        <th>Feedback</th> //sửa ở đây
                     </tr>
                 </thead>
                 <tbody id="rateTbody"></tbody>
@@ -338,6 +339,7 @@ function processRateData(sheetData, targetMsgId) {
     const idxSubmitDate = headers.findIndex(h => h && h.toString().toLowerCase().includes('submitdate'));
     const idxMsgId = headers.findIndex(h => h && h.toString().toLowerCase().includes('msgid'));
     const idxRating = headers.findIndex(h => h && h.toString().toLowerCase().includes('rating'));
+    const idxDetailed_feedback = headers.findIndex(h => h && h.toString().toLowerCase().includes('feedback')); //sửa ở đây
     
     // Quét tìm dòng chứa targetMsgId
     let targetIndex = -1;
@@ -365,15 +367,17 @@ function processRateData(sheetData, targetMsgId) {
         const msgId = row[idxMsgId] || '';
         const submitDate = row[idxSubmitDate] || '';
         const rating = row[idxRating] || '';
+        const feedback = row[idxDetailed_feedback] || ''; //Sửa ở đây
         
-        // Format đúng chuẩn yêu cầu: [ID] [Ngày tháng năm] [Trống] [Rating]
+        // Format đúng chuẩn yêu cầu: [ID] [Ngày tháng năm] [Trống] [Rating] [Feedback]
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${msgId}</td>
             <td>${submitDate}</td>
             <td></td>
             <td>${rating}</td>
-        `;
+            <td>${feedback}</td>
+        `; //sửa ở đây ^
         tbody.appendChild(tr);
     }
 }
